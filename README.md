@@ -41,11 +41,7 @@ The project consists of the following components:
             ├── SchoolApp/                  # Django app for school management
             
             │   ├── migrations/             # Database migrations
-            
-            │   ├── static/                  # Static files (CSS, JavaScript, images)
-            
-            │   ├── templates/               # HTML templates
-            
+ 
             │   ├── __init__.py
             
             │   ├── admin.py
