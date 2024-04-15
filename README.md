@@ -37,35 +37,65 @@ The project consists of the following components:
 
     SchoolProject/
             │
+            
             ├── SchoolApp/                  # Django app for school management
+            
             │   ├── migrations/             # Database migrations
+            
             │   ├── static/                  # Static files (CSS, JavaScript, images)
+            
             │   ├── templates/               # HTML templates
+            
             │   ├── __init__.py
+            
             │   ├── admin.py
+            
             │   ├── apps.py
+            
             │   ├── models.py               # Database models
+            
             │   ├── tests.py                # Unit tests
+            
             │   ├── urls.py                 # URL configurations
+            
             │   └── views.py                # Views (controller logic)
+            
             │
+            
             ├── SchoolProject/              # Django project settings
+            
             │   ├── __init__.py
+            
             │   ├── asgi.py
+            
             │   ├── settings.py             # Project settings
+            
             │   ├── urls.py                 # Root URL configurations
+            
             │   └── wsgi.py
+            
             │
+            
             ├── static/                     # Additional static files
+            
             │
+            
             ├── templates/                  # Additional HTML templates
+            
             │
+            
             ├── .venv/                       # Python virtual environment (optional)
+            
             │
+            
             ├── db.sqlite3                  # SQLite database file (local development)
+            
             │
+            
             ├── manage.py                   # Django management script
+            
             │
+            
             └── README.md                   # Project README file
 
 
