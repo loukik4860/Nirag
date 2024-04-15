@@ -2,17 +2,17 @@
 
 ### Table of Contents
 
-1.  Project Overview
+1.  **Project Overview**
 
-2.  Installation
+2.  **Installation**
 
-3. Configuration
+3. **Configuration**
 
-4. Usage
+4. **Usage**
 
-5. Contributing
+5. **Contributing**
 
-6. License
+6. **License**
 
 
 Project Overview
@@ -121,19 +121,19 @@ Static files (CSS, JavaScript, images) are served from the static/ directory, an
 
 Once the project is set up and running, you can access the following functionalities:
 
-**Home Page**: View a list of parents and search for parents by name or email.
+ *   **Home Page**: View a list of parents and search for parents by name or email.
 
 
-**Parents Management**:     Add, update, delete, and list parents.
+* **Parents Management**:     Add, update, delete, and list parents.
 
 
-**Students Management**:    Add, update, delete, and list students. Enroll students in classes.
+* **Students Management**:    Add, update, delete, and list students. Enroll students in classes.
 
 
-**Classes Management**:     Add, update, delete, and list classes. View enrolled students in each class.
+* **Classes Management**:     Add, update, delete, and list classes. View enrolled students in each class.
 
 
-**Enrollments**:    Enroll students in classes and view enrolled students.
+* **Enrollments**:    Enroll students in classes and view enrolled students.
 
 
 ### Contributing
