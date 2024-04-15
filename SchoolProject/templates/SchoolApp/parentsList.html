@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Parents List
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h4 class="text-center">Parents Information</h4>
+    <table class="table mt-4">
+        <thead class="table-primary text-center">
+        <tr>
+
+            <th scope="col">Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Child</th>
+            <th scope="col">Update</th>
+            <th scope="col">Delete</th>
+        </tr>
+        </thead>
+        <tbody class="text-center">
+        {% for parent in parents %}
+        <tr>
+            <td scope="row">{{ parent.name }}</td>
+            <td scope="row">{{ parent.email }}</td>
+            <td scope="row"><a class="btn btn-info">Child</a></td>
+            <td scope="row"><a class="btn btn-primary" href="{% url 'updateparents' parent.id %}">Update</a></td>
+            <td scope="row">
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                        data-bs-target="#deleteModal{{ parent.id }}">
+                    <i class="bi bi-trash3-fill"></i> Delete
+                </button>
+
+                <!-- Modal -->
+                <div class="modal fade" id="deleteModal{{ parent.id }}" tabindex="-1"
+                     aria-labelledby="deleteModalLabel{{ parent.id }}" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="deleteModalLabel{{ parent.id }}">Confirm Deletion</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                Are you sure you want to delete parent "{{ parent.name }}"?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <a href="{% url 'deleteparent' parent.id %}" class="btn btn-danger">Delete</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

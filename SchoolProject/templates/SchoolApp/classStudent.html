@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Class Student List
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h4 class="text-center">Class {{ student.class_enrolled.name }} Student</h4>
+    <table class="table table-stripped table-bordered mt-4">
+        <thead class="text-center">
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Age</th>
+            <th scope="col">Parents</th>
+            <th scope="col">Update</th>
+            <th scope="col">Delete</th>
+        </tr>
+        </thead>
+        <tbody class="text-center">
+        {% for enrollment in student %}
+        <tr>
+            <td scope="row">{{ enrollment.child.name }}</td>
+            <td scope="row">{{ enrollment.child.age }}</td>
+            <td scope="row">{{ enrollment.child.parent }}</td>
+            <td scope="row"><a class="btn btn-primary" href="{% url 'updateStudent' enrollment.child.id %}">Update</a>
+            </td>
+            <td scope="row">
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                        data-bs-target="#deleteModal{{ enrollment.child.id }}">
+                    DeRoll
+                </button>
+
+                <!-- Modal -->
+                <div class="modal fade" id="deleteModal{{ enrollment.child.id }}" tabindex="-1"
+                     aria-labelledby="deleteModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="deleteModalLabel">Confirm Deletion</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                Are you sure you want to delete {{ enrollment.child.name }}?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <a href="{% url 'unEnrolledClass' enrollment.child.id %}"
+                                   class="btn btn-danger">Delete</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

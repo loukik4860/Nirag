@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Add Parents
+{% endblock %}
+
+{% block content %}
+<div class="row px-5">
+    <div class="container">
+        <h4 class="text-center">Add Parents Information</h4>
+        <form method="post">
+            {% csrf_token %}
+            {% for fm in form %}
+            {{fm.label_tag}} {{fm}}
+            {% if fm.errors %}
+            <div class="text-danger">
+                {% for error in fm.errors %}
+                <i class="bi bi-dash-circle"></i> {{ error }}
+                {% endfor %}
+            </div>
+            {% endif %}
+            {% endfor %}
+            <input type="submit" value="submit" class="btn btn-success mt-3">
+            <input type="reset" value="reset" class="btn btn-info mt-3">
+        </form>
+    </div>
+</div>
+{% endblock %}
