@@ -5,12 +5,9 @@ Home
 {% endblock %}
 
 {% block content %}
-    <div class="container">
-    <h1>Hello Django</h1><br>
+<div class="container">
     {% for post in parents %}
-    <h1>{{forloop.counter}}. {{post.id}}</h1>
-    <p>Date Created: {{post.name}}</p>
-    <p>Last Update: {{post.email}}</p>
+    <p>{{post.name}} {{post.email}} {{post.}}</p>
     {% endfor %}
 </div>
 {% endblock %}

@@ -13,16 +13,16 @@ Add Parents
         <div class="classForm py-5 ">
             <form method="post" novalidate>
                 {% csrf_token %}
-                    {% for fm in form %}
-                        {{fm.label_tag}} {{fm}} {{fm.errors|striptags}}
-                    {% endfor %}
+                {% for fm in form %}
+                {{fm.label_tag}} {{fm}} {{fm.errors|striptags}}
+                {% endfor %}
                 <input type="submit" value="submit" class="btn btn-success">
                 <input type="reset" value="reset" class="btn btn-info">
                 {% if form.non_field_errors %}
                 <div class="alert alert-danger mt-3" role="alert">
                     {{ form.non_field_errors }}
                 </div>
-            {% endif %}
+                {% endif %}
             </form>
 
         </div>

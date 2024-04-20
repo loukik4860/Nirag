@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+Login
+{% endblock %}
+{% block style %}
+<link rel="stylesheet" href="{% static 'registration/css/registercss.css' %}">
+{% endblock %}
+{% block content %}
+<div class="row px-5">
+    <div class="container">
+        <h4 class="text-center">Add Parents Information</h4>
+        <form method="post">
+            {% csrf_token %}
+            {% for fm in form %}
+                {% if fm.field.name != 'password' and fm.field.name != 'password2' %}
+                    <div class="mb-3">
+                        <label for="{{ fm.id_for_label }}" class="form-label">{{ fm.label }}</label>
+                        {{ fm }}
+                        {% if fm.errors %}
+                           <label class="text-danger" mt-3">
+                               {{fm.errors|striptags}}
+                           </label>
+                        {% endif %}
+                    </div>
+                {% endif %}
+            {% endfor %}
+            <input type="submit" value="submit" class="btn btn-success mt-3">
+            <input type="reset" value="reset" class="btn btn-info mt-3">
+        </form>
+        {% if form.non_field_errors %}
+            <div class="alert alert-danger mt-3" role="alert">
+                {{ form.non_field_errors }}
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}

@@ -4,25 +4,29 @@ from .models import *
 from django.db.models import Q
 from django.contrib import messages
 import time
+from django.test import TestCase
+from django.core.exceptions import ValidationError
 
-
-# Create your views here.
 
 def homeView(request):
-    search_post = request.GET.get('search')
-    print(search_post)
-    if search_post:
-        parents = ParentModel.objects.filter(Q(name__icontains=search_post) | Q(email__icontains=search_post))
-    else:
-        raise ValidationError
     template_name = "SchoolApp/Home.html"
-    return render(request, template_name,{'parents':parents})
+    parents = None
+    try:
+        search_post = request.GET.get('search')
+        print(search_post)
+        if search_post:
+            parents = ParentModel.objects.filter(Q(name__icontains=search_post) | Q(email__icontains=search_post))
+        else:
+            raise ValidationError("Search parameter is missing.")
+    except ValidationError as e:
+        # Handle the validation error here
+        print("Validation Error:", e)
+    return render(request, template_name, {'parents': parents})
 
 
 def add_parents(request):
     form = ParentForm()
     template_name = "SchoolApp/parentForm.html"
-
     if request.method == "POST":
         form = ParentForm(request.POST)
         if form.is_valid():
