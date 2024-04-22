@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect
 from .forms import UserRegistrationForm
 from django.contrib import messages
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth import authenticate,login
+
 
 def registerVeiw(request):
     if request.method == 'POST':
@@ -17,20 +18,27 @@ def registerVeiw(request):
 
 
 def loginView(request):
-    form = AuthenticationForm()
-    context = {'form': form}
-    template_name = 'registration/login.html'
+    template_name = "registration/login.html"
+    context = {}
     if request.method == "POST":
-        form = AuthenticationForm(request=request,data=request.POST)
-        if form.is_valid():
-            username = form.cleaned_data['username']
-            password = form.cleaned_data['password']
-            user = authenticate(username= username,password=password)
-            if user is not None:
-                login(request,user)
-                messages.success(request,"SuccessFully logged in")
-                return redirect('')
-    return redirect(request,template_name,context)
+        uname = request.POST.get('username')
+        print(uname)
+        password = request.POST.get('password')
+        print(password)
+        user = authenticate(username=uname, password=password)
+        print("----------------", user)
+        if user is not None:
+            login(request, user)
+            messages.success(request, 'successfully logged in')
+            return redirect('registration_success')
+        else:
+            messages.error(request, 'User credentials are not correct')
+    return render(request, template_name, context)
+
+
+def logoutView(request):
+    logout(request)
+    return redirect('login')
 
 
 def registration_success(request):

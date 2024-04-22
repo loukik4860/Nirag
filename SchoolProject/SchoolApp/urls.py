@@ -5,7 +5,7 @@ from .views import add_parents, updateParents, parentsList, deleteParent, homeVi
 
 urlpatterns = [
     path('home/', homeView, name="home"),
-    path('parentslist', parentsList, name="parentsList"),
+    path('parentslist/', parentsList, name="parentsList"),
     path('addparents/', add_parents, name="addparents"),
     path('updateparents/<int:pk>/', updateParents, name="updateparents"),
     path('deleteparent/<int:pk>/', deleteParent, name="deleteparent"),

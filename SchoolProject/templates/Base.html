@@ -24,6 +24,7 @@
         </button>
         <div class="collapse navbar-collapse justify-content-between" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                {% if user.is_authenticated %}
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
                 </li>
@@ -32,13 +33,22 @@
                        aria-expanded="false">
                         Add
                     </a>
+                    {% if user.is_principal %}
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="{% url 'addClass' %}">Add Class</a></li>
                         <li><a class="dropdown-item" href="{% url 'addparents' %}">Add parents</a></li>
                         <li><a class="dropdown-item" href="{% url 'addStudent' %}">Add Student</a></li>
                         <li><a class="dropdown-item" href="{% url 'enrollStudent' %}">Enroll Student</a></li>
                     </ul>
+                    {% elif user.is_teacher %}
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="{% url 'addStudent' %}">Add Student</a></li>
+                        <li><a class="dropdown-item" href="{% url 'enrollStudent' %}">Enroll Student</a></li>
+                    </ul>
+                    {% endif %}
                 </li>
+                {% endif %}
+                {% if user.is_authenticated %}
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                        aria-expanded="false">
@@ -50,6 +60,7 @@
                         <li><a class="dropdown-item" href="{% url 'studentList' %}">Student List</a></li>
                     </ul>
                 </li>
+                {% endif %}
             </ul>
             <form class="d-flex" role="search" action="{% url 'home' %}">
                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search">
@@ -63,9 +74,14 @@
                             <i class="bi bi-person-circle"></i>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end">
+                            {% if user.is_authenticated %}
+                            <li><a class="dropdown-item" href="#">Profile <p class="fst-italic">{{user.name}}</p></a>
+                            </li>
+                            <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
+                            {% else %}
                             <li><a class="dropdown-item" href="{% url 'register' %}">Register</a></li>
                             <li><a class="dropdown-item" href="{% url 'login' %}">Login</a></li>
-                            <li><a class="dropdown-item" href="#">Logout</a></li>
+                            {% endif %}
                         </ul>
                     </li>
                 </ul>

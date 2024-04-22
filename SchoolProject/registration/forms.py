@@ -1,5 +1,6 @@
 from django import forms
 from .models import MyUser
+from django.contrib.auth.forms import AuthenticationForm
 
 
 class UserRegistrationForm(forms.ModelForm):
@@ -45,3 +46,6 @@ class UserRegistrationForm(forms.ModelForm):
         if commit:
             user.save()
         return user
+
+
+

@@ -6,6 +6,7 @@ from django.contrib import messages
 import time
 from django.test import TestCase
 from django.core.exceptions import ValidationError
+from django.contrib.auth.decorators import login_required
 
 
 def homeView(request):
@@ -24,6 +25,7 @@ def homeView(request):
     return render(request, template_name, {'parents': parents})
 
 
+@login_required(login_url='account/login')
 def add_parents(request):
     form = ParentForm()
     template_name = "SchoolApp/parentForm.html"
@@ -40,6 +42,7 @@ def add_parents(request):
     return render(request, template_name, context)
 
 
+@login_required(login_url='account/login')
 def updateParents(request, pk=None):
     parent = ParentModel.objects.get(id=pk)
     form = ParentForm(instance=parent)
@@ -56,6 +59,7 @@ def updateParents(request, pk=None):
     return render(request, template_name, context)
 
 
+@login_required(login_url='account/login')
 def parentsList(request):
     parents = ParentModel.objects.all()
     template_name = 'SchoolApp/parentsList.html'
@@ -63,12 +67,14 @@ def parentsList(request):
     return render(request, template_name, context)
 
 
+@login_required(login_url='account/login')
 def deleteParent(request, pk=None):
     parents = ParentModel.objects.get(id=pk)
     parents.delete()
     return redirect('parentsList')
 
 
+@login_required(login_url='account/login')
 def add_student(request):
     form = ChildForm()
     template_name = "SchoolApp/studentForm.html"
@@ -85,6 +91,7 @@ def add_student(request):
     return render(request, template_name, context)
 
 
+@login_required(login_url='account/login')
 def studentList(request):
     student = ChildModel.objects.all()
     template_name = 'SchoolApp/studentList.html'
@@ -92,6 +99,7 @@ def studentList(request):
     return render(request, template_name, context)
 
 
+@login_required(login_url='account/login')
 def updateStudent(request, pk=None):
     student = ChildModel.objects.get(id=pk)
     form = ChildForm(instance=student)
@@ -108,12 +116,14 @@ def updateStudent(request, pk=None):
     return render(request, template_name, context)
 
 
+@login_required(login_url='account/login')
 def deleteStudent(request, pk=None):
     student = ChildModel.objects.get(id=pk)
     student.delete()
     return redirect('studentList')
 
 
+@login_required(login_url='account/login')
 def add_Class(request):
     form = ClassForm()
     template_name = "SchoolApp/addClass.html"
@@ -131,6 +141,7 @@ def add_Class(request):
     return render(request, template_name, context)
 
 
+@login_required(login_url='account/login')
 def classList(request):
     Class = ClassModel.objects.all()
     template_name = 'SchoolApp/ClassList.html'
@@ -138,6 +149,7 @@ def classList(request):
     return render(request, template_name, context)
 
 
+@login_required(login_url='account/login')
 def updateClass(request, pk=None):
     Class = ClassModel.objects.get(id=pk)
     form = ClassForm(instance=Class)
@@ -154,12 +166,14 @@ def updateClass(request, pk=None):
     return render(request, template_name, context)
 
 
+@login_required(login_url='account/login')
 def deleteClass(request, pk=None):
     Class = ClassModel.objects.get(id=pk)
     Class.delete()
     return redirect('classList')
 
 
+@login_required(login_url='account/login')
 def ClassEnrolledView(request):
     form = EnrollForm()
     template_name = "SchoolApp/ClassEnroll.html"
@@ -176,6 +190,7 @@ def ClassEnrolledView(request):
     return render(request, template_name, context)
 
 
+@login_required(login_url='account/login')
 def ClassStudent(request, pk=None):
     student = EnrollModel.objects.filter(class_enrolled__id=pk)
     template_name = 'SchoolApp/classStudent.html'
@@ -183,6 +198,7 @@ def ClassStudent(request, pk=None):
     return render(request, template_name, context)
 
 
+@login_required(login_url='account/login')
 def unenrolledClass(request, pk=None):
     student = EnrollModel.objects.filter(class_enrolled__id=pk)
     student.delete()

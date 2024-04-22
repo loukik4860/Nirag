@@ -1,32 +1,29 @@
 {% extends 'base.html' %}
 
 {% block title %}
-    Login
+Login
 {% endblock %}
 
 {% block content %}
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-6">
-            <h4 class="text-center">Add Parents Information</h4>
+            <h4 class="text-center">Login</h4>
             <form method="post">
                 {% csrf_token %}
-                {% for field in form %}
                 <div class="mb-3">
-                    <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
-
-                    {{ field }}
-                    {% if field.errors %}
-                        <div class="text-danger">
-                            {% for error in field.errors %}
-                                <i class="bi bi-dash-circle"></i> {{ error }}
-                            {% endfor %}
-                        </div>
-                    {% endif %}
+                    <label for="username" class="form-label">Email address</label>
+                    <input type="email" class="form-control" id="username" name="username"
+                           placeholder="name@example.com">
                 </div>
-                {% endfor %}
-                <button type="submit" class="btn btn-success">Submit</button>
-                <button type="reset" class="btn btn-info">Reset</button>
+                <label for="password" class="form-label">Password</label>
+                <input type="password" id="password" class="form-control" name="password" aria-describedby="passwordHelpBlock">
+                <div id="passwordHelpBlock" class="form-text mt-2">
+                    Your password must be 8-20 characters long, contain letters and numbers, and must not contain
+                    spaces, special characters, or emoji.
+                </div>
+                <button type="submit" class="btn btn-success mt-3">Submit</button>
+                <button type="reset" class="btn btn-info mt-3">Reset</button>
             </form>
         </div>
     </div>
