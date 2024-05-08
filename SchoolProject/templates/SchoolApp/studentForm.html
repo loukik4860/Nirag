@@ -1,7 +1,11 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block title %}
-Add Student
+    Add Student
+{% endblock %}
+
+{% block style %}
+    <link rel="stylesheet" href="{% static 'SchoolApp/css/studentForm.css' %}">
 {% endblock %}
 
 {% block content %}
