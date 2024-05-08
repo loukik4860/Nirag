@@ -96,6 +96,12 @@ class SubjectForm(forms.ModelForm):
             'politics': forms.NumberInput(attrs={'class': 'form-control'}),
         }
 
+    def clean(self):
+        child = self.cleaned_data['child']
+        print(child)
+        if SubjectModel.objects.filter(child=child).exists():
+            raise validators.ValidationError("Student mark has been already Entered")
+
     def clean_english(self):
         english = self.cleaned_data['english']
         if english > 100 or english < 0:
@@ -109,3 +115,45 @@ class SubjectForm(forms.ModelForm):
             print("clean_mathematics")
             raise validators.ValidationError("Marks should not be more than 100 and less than zero ('0')")
         return mathematics
+
+    def clean_chemistry(self):
+        chemistry = self.cleaned_data['chemistry']
+        if chemistry > 100 or chemistry < 0:
+            print("cleaned chemistry")
+            raise validators.ValidationError("Marks should not be more than 100 and less than zero ('0')")
+        return chemistry
+
+    def clean_biology(self):
+        biology = self.cleaned_data['biology']
+        if biology > 100 or biology<0:
+            print("cleaned Biology")
+            raise validators.ValidationError("Marks should not be more than 100 and less than zero ('0')")
+        return biology
+
+    def clean_history(self):
+        history = self.cleaned_data['history']
+        if history > 100 or history < 0:
+            print("cleaned history")
+            raise validators.ValidationError("Marks should not be more than 100 and less than zero ('0')")
+        return history
+
+    def clean_geography(self):
+        geography = self.cleaned_data['geography']
+        if geography > 100 or geography < 0:
+            print("cleaned geography")
+            raise validators.ValidationError("Marks should not be more than 100 and less than zero ('0')")
+        return geography
+
+    def clean_geography(self):
+        geography = self.cleaned_data['geography']
+        if geography > 100 or geography < 0:
+            print("cleaned geography")
+            raise validators.ValidationError("Marks should not be more than 100 and less than zero ('0')")
+        return geography
+
+    def clean_politics(self):
+        politics = self.cleaned_data['politics']
+        if politics > 100 or politics < 0:
+            print("cleaned geography")
+            raise validators.ValidationError("Marks should not be more than 100 and less than zero ('0')")
+        return politics

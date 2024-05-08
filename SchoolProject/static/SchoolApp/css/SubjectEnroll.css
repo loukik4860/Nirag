@@ -1,8 +1,17 @@
-.errorlist{
+.errorlist {
     list-style-type: none;
-    font-family:'Times New Roman', Times, serif;
-    color: black;
-    font-size: 1.2rem;
-    text-align: center;
+    font-family: 'Times New Roman', Times, serif;
+    color: red;
+    font-size: 14px;
     padding-top: 5px;
+}
+.enrollForm{
+    padding-left: 10rem;
+    padding-right: 10rem;
+    padding-top: 1rem;
+    margin-bottom : 2rem;
+}
+.label_tag{
+    font-family: 'Times New Roman', Times, serif;
+    font-size : 1.2rem;
 }

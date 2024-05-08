@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block title %}
-Home
+    Enroll Marks
 {% endblock %}
 {% block style %}
 <link rel="stylesheet" href="{% static 'SchoolApp/css/SubjectEnroll.css' %}">
@@ -14,7 +14,11 @@ Home
             <form method="post" novalidate>
                 {% csrf_token %}
                 {% for fm in form %}
-                {{fm.label_tag}} {{fm}} {{fm.errors|striptags}}<br>
+                <label class="label_tag">{{fm.label_tag}}</label>
+                {{fm}}
+                <div class="errorlist">
+                    {{ fm.errors|striptags }}
+                </div>
                 {% endfor %}
                 <div class="mt-3">
                     <input type="submit" value="Enroll" class="btn btn-success">
@@ -22,9 +26,9 @@ Home
                 </div>
             </form>
             {% if form.non_field_errors %}
-            <div class="alert alert-danger mt-3" role="alert">
-                {{ form.non_field_errors }}
-            </div>
+                <div class="alert alert-danger mt-3" role="alert">
+                    {{ form.non_field_errors }}
+                </div>
             {% endif %}
         </div>
     </div>
