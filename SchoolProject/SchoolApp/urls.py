@@ -1,8 +1,7 @@
 from django.urls import path
 from .views import add_parents, updateParents, parentsList, deleteParent, homeView, \
     add_student, studentList, updateStudent, deleteStudent, add_Class, classList, updateClass, \
-    deleteClass, ClassEnrolledView, ClassStudent,unenrolledClass
-
+    deleteClass, ClassEnrolledView, ClassStudent,unenrolledClass,subjectEnrolledView
 urlpatterns = [
     path('home/', homeView, name="home"),
     path('parentslist/', parentsList, name="parentsList"),
@@ -19,5 +18,6 @@ urlpatterns = [
     path('classDelete/<int:pk>/', deleteClass, name="classDelete"),
     path('enrollStudent/', ClassEnrolledView, name="enrollStudent"),
     path('classEnrolledStudent/<int:pk>/', ClassStudent, name="classStudent"),
-    path('unenrolledStudent/<int:pk>/',unenrolledClass,name="unEnrolledClass")
+    path('unenrolledStudent/<int:pk>/',unenrolledClass,name="unEnrolledClass"),
+    path('markEnrolled/',subjectEnrolledView,name="subjectEnrolled")
 ]

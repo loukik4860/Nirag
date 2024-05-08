@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import ParentModel, ChildModel, ClassModel, EnrollModel
+from .models import ParentModel, ChildModel, ClassModel, EnrollModel, SubjectModel, historicalData
 
 
 # Register your models here.
@@ -12,7 +12,7 @@ class ParentAdmin(admin.ModelAdmin):
 
 @admin.register(ChildModel)
 class ChildAdmin(admin.ModelAdmin):
-    list_display = ('id','name', 'age', 'parent')
+    list_display = ('id', 'name', 'age', 'parent')
     search_fields = ('name',)
     list_filter = ('parent',)
 
@@ -26,6 +26,17 @@ class ClassAdmin(admin.ModelAdmin):
 
 @admin.register(EnrollModel)
 class EnrollAdmin(admin.ModelAdmin):
-    list_display = ('id','child', 'class_enrolled', 'enrollment_date')
+    list_display = ('id', 'child', 'class_enrolled', 'enrollment_date')
     search_fields = ('child__name', 'class_enrolled__name')
     list_filter = ('enrollment_date',)
+
+
+@admin.register(SubjectModel)
+class SubjectAdmin(admin.ModelAdmin):
+    list_display = (
+        'id', 'child', 'english', 'mathematics', 'chemistry', 'biology', 'history', 'geography', 'politics')
+
+
+@admin.register(historicalData)
+class historicalDataAdmin(admin.ModelAdmin):
+    list_display = ('id', 'child', 'year', 'percentage')

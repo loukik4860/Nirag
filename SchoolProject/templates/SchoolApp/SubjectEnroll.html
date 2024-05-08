@@ -1,26 +1,25 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block title %}
-Class Enroll
+Home
 {% endblock %}
 {% block style %}
-<link rel="stylesheet" href="{% static 'SchoolApp/css/ClassEnrollStyle.css' %}">
+<link rel="stylesheet" href="{% static 'SchoolApp/css/SubjectEnroll.css' %}">
 {% endblock %}
 {% block content %}
 <div class="row px-5">
     <div class="container">
-        <h4 class="text-center">Enroll Class</h4>
+        <h4 class="text-center">Enroll Subject Marks</h4>
         <div class="enrollForm">
             <form method="post" novalidate>
                 {% csrf_token %}
                 {% for fm in form %}
-                {{fm.label_tag}} {{fm}} {{fm.errors|striptags}}
+                {{fm.label_tag}} {{fm}} {{fm.errors|striptags}}<br>
                 {% endfor %}
-                <div>
+                <div class="mt-3">
                     <input type="submit" value="Enroll" class="btn btn-success">
                     <input type="reset" value="reset" class="btn btn-info">
                 </div>
-
             </form>
             {% if form.non_field_errors %}
             <div class="alert alert-danger mt-3" role="alert">

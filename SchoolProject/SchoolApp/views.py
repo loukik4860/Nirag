@@ -1,12 +1,15 @@
 from django.shortcuts import render, redirect
-from .forms import ParentForm, ChildForm, EnrollForm, ClassForm
+from .forms import ParentForm, ChildForm, EnrollForm, ClassForm, SubjectForm
 from .models import *
 from django.db.models import Q
 from django.contrib import messages
 import time
-from django.test import TestCase
 from django.core.exceptions import ValidationError
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator
+import logging
+
+logger = logging.getLogger("SchoolApp.views")
 
 
 def homeView(request):
@@ -44,6 +47,8 @@ def add_parents(request):
 
 @login_required(login_url='account/login')
 def updateParents(request, pk=None):
+    logger.info('Processing request in my_view')
+
     parent = ParentModel.objects.get(id=pk)
     form = ParentForm(instance=parent)
     template_name = 'SchoolApp/parentForm.html'
@@ -54,8 +59,10 @@ def updateParents(request, pk=None):
             form.save()
             time.sleep(3)
             messages.success(request, 'data has been updated')
+            logger.info("parents data has beeen saved")
         else:
             messages.error(request, 'error has occured')
+            logger.error("error occured at saving parent model")
     return render(request, template_name, context)
 
 
@@ -94,8 +101,11 @@ def add_student(request):
 @login_required(login_url='account/login')
 def studentList(request):
     student = ChildModel.objects.all()
+    paginator = Paginator(student, 4)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
     template_name = 'SchoolApp/studentList.html'
-    context = {'students': student}
+    context = {'page_obj': page_obj}
     return render(request, template_name, context)
 
 
@@ -203,3 +213,21 @@ def unenrolledClass(request, pk=None):
     student = EnrollModel.objects.filter(class_enrolled__id=pk)
     student.delete()
     return redirect('enrollStudent')
+
+
+def subjectEnrolledView(request):
+    form = SubjectForm()
+    template_name = "SchoolApp/SubjectEnroll.html"
+    if request.method == "POST":
+        form = SubjectForm(request.POST)
+        if form.is_valid():
+            form.save()
+            time.sleep(3)
+            messages.success(request, "Subject Data has been saved")
+            return redirect('studentList')
+        else:
+            messages.error(request, "Some error has occurred try again")
+    context = {'form': form}
+    print("added")
+    return render(request, template_name, context)
+
