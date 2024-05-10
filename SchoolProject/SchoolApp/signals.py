@@ -11,8 +11,7 @@ def calculate_percentage_of_student(sender, instance, created, **kwargs):
         student = instance.child
         marks = SubjectModel.objects.filter(child=student)
         total_marks = sum([getattr(instance, field) for field in ['english', 'mathematics', 'chemistry', 'biology', 'history', 'geography', 'politics']])
-        percentage = round((total_marks / 700) * 100, 2)  # Round to 2 decimal places
-
+        percentage = round((total_marks / 700) * 100, 2)
         historical_percentage, _ = historicalData.objects.update_or_create(
             child=student,
             defaults={
